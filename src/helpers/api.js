@@ -5,18 +5,15 @@ export const signup = async (payload) => {
         const result = await axiosInstance.post(`/auth/register`, payload);
         return result.data;
     } catch (error) {
-        console.log("error", error);
         throw error.response;
     }
 };
 
 export const login = async (payload) => {
-    console.log("payload login", payload);
     try {
         const result = await axiosInstance.post(`/auth/login`, payload);
         return result.data;
     } catch (error) {
-        console.log("error", error);
         throw error.response;
     }
 };
@@ -26,7 +23,6 @@ export const fetchOrders = async () => {
         const result = await axiosInstance.get(`/orders`);
         return result.data;
     } catch (error) {
-        console.log("error", error);
         throw error.response;
     }
 };
@@ -36,7 +32,6 @@ export const addOrder = async (payload) => {
         const result = await axiosInstance.post(`/orders`, payload);
         return result.data;
     } catch (error) {
-        console.log("error", error);
         throw error.response;
     }
 };
@@ -46,7 +41,6 @@ export const deleteOrder = async (orderId) => {
         const result = await axiosInstance.delete(`/orders/${orderId}`);
         return result.data;
     } catch (error) {
-        console.log("error", error);
         throw error.response;
     }
 };

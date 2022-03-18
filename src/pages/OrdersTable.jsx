@@ -1,29 +1,19 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Dialog from "../components/Dialog";
 import DataTable from "../components/DataTable";
 import AddOrderForm from "../components/AddOrderForm";
-import { fetchOrders } from "../helpers/api";
+import StatusFilter from "../components/StatusFilter";
 
-const OrdersTable = () => {
+const OrdersTable = ({ orders, reloadOrders }) => {
   const [data, setData] = useState([]);
   const [showAddOrderModal, setShowAddOrderModal] = useState(false);
 
-  const fetchData = useCallback(() => {
-    fetchOrders()
-      .then((res) => {
-        setData(res.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    setData(orders);
+  }, [orders]);
 
   const toggleAddOrderModal = () => {
     setShowAddOrderModal((prevState) => !prevState);
@@ -31,7 +21,16 @@ const OrdersTable = () => {
 
   const handleFormClose = () => {
     toggleAddOrderModal();
-    fetchData();
+    reloadOrders?.();
+  };
+
+  const handleStatusFilter = (status) => {
+    if (status !== "") {
+      const filteredData = orders.filter((order) => order.status === status);
+      setData(filteredData);
+    } else {
+      setData(orders);
+    }
   };
 
   return (
@@ -48,7 +47,10 @@ const OrdersTable = () => {
         />
       )}
       <Box m={3}>
-        <Grid container justifyContent="flex-end">
+        <Grid container justifyContent="space-between">
+          <Grid item xs={3}>
+            <StatusFilter onChange={(value) => handleStatusFilter(value)} />
+          </Grid>
           <Button
             onClick={toggleAddOrderModal}
             variant="contained"

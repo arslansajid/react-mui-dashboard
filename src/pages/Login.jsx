@@ -51,7 +51,6 @@ export default function SignIn() {
 
   const handleformSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
     const reqBody = {
       email,
       password,
