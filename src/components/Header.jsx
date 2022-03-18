@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Cookie from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     Cookie.remove("access_token");
@@ -37,9 +38,15 @@ export default function ButtonAppBar() {
             <Link to="/">Orders List</Link>
           </Typography>
           <Grid>
-            <Button color="inherit">
-              <Link to="/graphs">Chart</Link>
-            </Button>
+            {location.pathname === "/" ? (
+              <Link to="/graphs">
+                <Button color="inherit">Chart</Button>
+              </Link>
+            ) : (
+              <Link to="/">
+                <Button color="inherit">Table</Button>
+              </Link>
+            )}
             <Button onClick={handleLogout} color="inherit">
               Log Out
             </Button>
