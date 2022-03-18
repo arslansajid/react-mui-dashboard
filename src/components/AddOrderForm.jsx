@@ -47,7 +47,6 @@ export default function AddOrderForm(props) {
     };
     addOrder(reqBody)
       .then((res) => {
-        console.log(res);
         onClose();
         alert("Order added successfully");
       })

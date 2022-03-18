@@ -16,10 +16,10 @@ const Graphs = ({ orders }) => {
 
   return (
     <Grid className={classes.paper} container>
-      <Grid item md={6} sm={12}>
+      <Grid item md={6} xs={12}>
         <PieChart data={orders} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item md={6} xs={12}>
         <BarGraph data={orders} />
       </Grid>
     </Grid>

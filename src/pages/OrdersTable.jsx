@@ -61,7 +61,7 @@ const OrdersTable = ({ orders, reloadOrders }) => {
         </Grid>
       </Box>
       <Box m={3}>
-        <DataTable data={data} setData={setData} />
+        <DataTable data={data} reloadOrders={reloadOrders} />
       </Box>
     </>
   );

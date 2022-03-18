@@ -12,7 +12,7 @@ const options = {
   selectableRows: false,
 };
 
-const DataTable = ({ data, setData }) => {
+const DataTable = ({ data, reloadOrders }) => {
   const handleOrderDelete = (index) => {
     const selectedOrderID = data[index].id;
 
@@ -20,10 +20,8 @@ const DataTable = ({ data, setData }) => {
     if (confirm("Are you sure you want to delete this order?")) {
       deleteOrder(selectedOrderID)
         .then((res) => {
-          const ordersCopy = [...data];
-          ordersCopy.splice(index, 1);
-          setData(ordersCopy);
           alert("Order deleted successfully!");
+          reloadOrders?.();
         })
         .catch((err) => {
           console.log(err);
