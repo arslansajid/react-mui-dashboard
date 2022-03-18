@@ -9,6 +9,7 @@ const options = {
   download: false,
   print: false,
   searchOpen: true,
+  selectableRows: false,
 };
 
 const DataTable = ({ data, setData }) => {
