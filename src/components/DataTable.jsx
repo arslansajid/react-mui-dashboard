@@ -8,6 +8,7 @@ const options = {
   filter: false,
   download: false,
   print: false,
+  searchOpen: true,
 };
 
 const DataTable = ({ data, setData }) => {
